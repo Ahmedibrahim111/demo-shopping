@@ -1,0 +1,118 @@
+
+<div class="page-header d-md-flex justify-content-between">
+    <div> 
+        <h3>Orders</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb"> 
+                <li class="breadcrumb-item">
+                    <a asp-action="index" asp-controller="orders">Orders Management</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"
+                        (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="ChoseUser">
+                <div class="card">
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Count</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>TotalPrice</th>
+                                <th>Sizes</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let userpayment of PaymentOrderDetails">
+
+                                <td>{{userpayment.numberProducts}}</td>
+                                <td>
+                                    <a href="#">
+
+                                        {{userpayment.nameProduct}}
+                                    </a>
+                                </td>
+                                <td>{{userpayment.price}}</td>
+                                <td>{{userpayment.totalPrice}}</td>
+
+                                <td>{{userpayment.size}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>UserName</th>
+                    <th>Phone</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>Details</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let pd of ItemsNew">
+                    <td>{{pd.billNumber}}</td>
+                    <td>
+                        <a href="#">
+
+                            {{pd.userName}}
+                        </a>
+                    </td>
+                    <td>{{pd.phoneNumber}}</td>
+                    <td>{{pd.totalPrice}}</td>
+
+
+                    <td>
+                        {{pd.date}}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-light mr-1"
+                                data-backdrop="static" data-keyboard="false"
+                                data-toggle="modal" data-target="#exampleModal"
+                                (click)="GetDetails(pd.billNumber)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-detailed-fill" viewBox="0 0 16 16">
+                                <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5Zm4 1a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5Zm0 5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5ZM4 8a1 1 0 0 0 1 1h6a1 1 0 1 0 0-2H5a1 1 0 0 0-1 1Z" />
+                            </svg>
+                        </button>
+                    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

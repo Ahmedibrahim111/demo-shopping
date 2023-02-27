@@ -1,0 +1,146 @@
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Users</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="index" asp-controller="products">Products list</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+
+<button type="button" class="btn btn-primary float-right m-2"
+        data-toggle="modal" data-target="#exampleModal"
+        (click)="addClick()"
+        data-backdrop="static" data-keyboard="false">
+open Details</button>
+
+<br />
+<div class="card-group">
+
+    <div class="col-md-4 col-xs-6"  *ngFor="let pd of ItemsNew">
+        <div class="card">
+            <div class="card-body" >
+                <div class="my-3">
+                    <a href="#" title="Vase">
+                        <img src="../../assets/media/image/products/product1.png"
+                             class="img-fluid rounded" alt="Vase">
+                    </a>
+                </div>
+
+
+                <div class="text-center">
+                    <a href="#">
+                        <h4>{{pd.name}} -  {{pd.size}}</h4>
+                    </a>
+                    <p>
+                        <span class="text-truncate">{{pd.price|currency}}</span>
+                    </p>
+                    <div class="mt-2">
+                        <button class="btn btn-primary add-to-card" (click)="incrementCounter(pd)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">BillUser</h5>
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"
+                        (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="ChoseUser">
+                <div class="card">
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Count</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>TotalPrice</th>
+                                <th>Sizes</th>
+
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let userpayment of PaymentOrder">
+
+                                <td>{{userpayment.NumberProducts}}</td>
+                                <td>
+                                    <a href="#">
+
+                                        {{userpayment.NameProduct}}
+                                    </a>
+                                </td>
+                                <td>{{userpayment.Price}}</td>
+                                <td>{{userpayment.TotalPrice}}</td>
+
+                                <td>{{userpayment.Size}}</td>
+
+
+                                <td>
+
+                                    <button type="button" class="btn btn-light mr-1"
+                                            (click)="decrementCounter(userpayment)">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                        </svg>
+                                    </button>
+
+                                    <button type="button" class="btn btn-light mr-1"
+                                            (click)="Remove(userpayment)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                        </svg>
+                                    </button>
+
+                                </td>
+
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    {{Total}}
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>UsrName</label>
+                        <input class="form-control form-control-lg" placeholder="Enter User Name" name="size"
+                               [(ngModel)]="OwnerName">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Phone</label>
+                        <input class="form-control form-control-lg" placeholder=" Enter Phone" name="price"
+                               [(ngModel)]="PhoneNumber">
+                    </div>
+
+                </div>
+                <button type="button" class="btn btn-primary float-right m-2"
+                         data-target="#exampleModal"
+                        (click)="onSubmit()"
+                        data-backdrop="static" data-keyboard="false">
+                    Add 
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
